@@ -2,9 +2,13 @@
 import { Category } from "@/sanity.types";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { Check, ChevronsUpDown } from "lucide-react";
+import {  ChevronsUpDown } from "lucide-react";
 import {
   Command,
   CommandInput,
@@ -13,7 +17,7 @@ import {
   CommandEmpty,
   CommandGroup,
 } from "@/components/ui/command";
-import { cn } from "@/lib/utils";
+
 interface Props {
   categories: Category[]; // Array of category names
 }
@@ -43,23 +47,20 @@ const CategorySelector = ({ categories }: Props) => {
           <CommandInput
             placeholder="Search By Category......."
             className="h-9"
-          onKeyDown={(e: any) => {
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
               if (e.key === "Enter") {
                 const selectedCategory = categories.find((c) =>
                   c.title
                     ?.toLowerCase()
                     .includes(e.currentTarget.value.toLowerCase())
                 );
-                if (selectedCategory?.slug?.current){
+                if (selectedCategory?.slug?.current) {
                   setValue(selectedCategory?._id);
                   router.push(`/categories/${selectedCategory.slug.current}`);
                   setOpen(false);
-              
                 }
-                  
               }
-         }}
-
+            }}
           />
 
           <CommandList>
@@ -87,7 +88,6 @@ const CategorySelector = ({ categories }: Props) => {
                   ) : (
                     category.title
                   )}
-
                 </CommandItem>
               ))}
             </CommandGroup>

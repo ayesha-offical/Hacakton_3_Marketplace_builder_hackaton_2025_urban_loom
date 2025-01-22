@@ -7,7 +7,7 @@ import {
   getSale,
 } from "@/sanity/helpers/main";
 
-import Image from "next/image";
+
 
 export default async function Home() {
   const sales = await getSale();

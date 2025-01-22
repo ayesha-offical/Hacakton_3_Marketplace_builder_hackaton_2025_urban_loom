@@ -13,8 +13,8 @@ const Header = async () => {
 
 
   return (
-    <header className="w-full py-4 border-b border-gray-400">
-      <Container className="flex items-center justify-between gap-6  ">
+    <header className="w-full py-4 border-b border-gray-400 sticky top-0 z-50 bg-white ">
+      <Container className="flex md:items-center justify-between gap-6 flex-col md:flex-row ">
         <Link href={"/"} className="font-bold text-3xl hover:text-gray-600"> 
      <Image
       src="/Urban Loom.png"
@@ -55,7 +55,7 @@ const Header = async () => {
             {user ? (
               <div  className="flex items-center text-sm gap-2 border border-gray-200 px-2 py-1 rounded-md shadow-md hover:shadow-none hoverEffect">
                 <UserButton />
-                <div className="flex flex-col ">
+                <div className="hidden md:inline-flex flex-col ">
                   <p className="text-xs">
                   Account Login!
                 </p>

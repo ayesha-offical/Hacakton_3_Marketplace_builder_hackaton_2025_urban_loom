@@ -5,9 +5,7 @@ import CategorySelector from "./CategorySelector";
 const Categories = ({ categories }: { categories: Category[] }) => {
   return (
     <div className="py-5">
-      <CategorySelector 
-      categories={ categories}
-      />
+      <CategorySelector categories={categories} />
     </div>
   );
 };

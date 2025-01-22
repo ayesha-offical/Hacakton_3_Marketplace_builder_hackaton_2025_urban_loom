@@ -13,9 +13,8 @@ interface Props {
   className?: string;
 }
 
-const AddtoCart = ({ product, className }: Props) => {
-  const [isClient,setIsClient] = useState(false);
-
+const AddtoCart = ({ product }: Props) => {
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -34,14 +33,14 @@ const AddtoCart = ({ product, className }: Props) => {
         <div className="text-sm">
           <div className="mr-5 flex items-center justify-between">
             <span className="text-xs text-muted-foreground">Quantity</span>
-            <QuantityOfItems
-            product={product}
-             />
+            <QuantityOfItems product={product} />
           </div>
-         <div className="flex items-center justify-between mr-5 border-t  pt-1">
+          <div className="flex items-center justify-between mr-5 border-t  pt-1">
             <span>Subtotal </span>
-            <PriceFormat amount={product?.price? product?.price * itemsCount : 0}/>
-         </div>
+            <PriceFormat
+              amount={product?.price ? product?.price * itemsCount : 0}
+            />
+          </div>
         </div>
       ) : (
         <Button
