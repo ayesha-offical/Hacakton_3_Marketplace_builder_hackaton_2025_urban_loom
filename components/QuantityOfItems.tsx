@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { HiMinus, HiPlus } from "react-icons/hi2";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
+import useCartStore from "@/store";
 
 interface Props {
   product: Product;
@@ -10,16 +11,28 @@ interface Props {
   borderStyle?: string;
 }
 
-const QuantityOfItems = ({ }: Props) => {
+const QuantityOfItems = ({ product}: Props) => {
+  const {addItem, removeItem, getItemCount} = useCartStore()
   const handleRemoveItem = () => {
     // implement logic to remove item from the cart
-    toast.success("Item removed");
+    removeItem (product?._id);
+    if (itemsCount > 1){
+      toast.success("Quantity Decreased");
+    } else {
+      toast.success(
+        `${product?.name?.substring(0, 12)}....removed successfully`
+      )
+    }
+
+    // TODO: check if item is out of stock and disable adding more
   };
   const handleAddItem = () => {
     // implement logic to add item to the cart
-    toast.success("Item added");
+    addItem (product);
+    toast.success("Quantity Increased");
   };
-  const itemCount = 5;
+  const itemsCount =getItemCount(product._id);
+
   return (
     <div className={cn("flex items-center gap-1 pb-1 text-base")}>
       <Button
@@ -32,7 +45,7 @@ const QuantityOfItems = ({ }: Props) => {
       </Button>
 
       <span className="font-semibold w-5 text-center text-slate-800">
-        {itemCount}
+        {itemsCount}
       </span>
       <Button
         variant="outline"

@@ -23,7 +23,7 @@ const ProductItems = ({ products, title, categories }: Props) => {
        
       </div>}
       
-<ProductGrid products={products}/>
+<ProductGrid  products={products}/>
     </div>
   );
 };

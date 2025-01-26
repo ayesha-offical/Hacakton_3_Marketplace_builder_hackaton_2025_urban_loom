@@ -6,23 +6,16 @@ import { BiSolidError } from "react-icons/bi";
 import ProductGrid from "@/components/ProductGrid";
 import { Metadata } from "next";
 
+const SearchPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ query: string }>;
+}) => {
+  const { query } = await searchParams;
+  const products = await searchProductsByName(query);
 
-interface Props {
-  searchParams: {
-    query: string;
-  };
-}
-export const metadata: Metadata = {
-  title: 'Search Products',
-  description: 'Search for products in our store',
-};
-
-const SearchPage = async ({ searchParams }: Props) => {
-  const  {query} = await  searchParams
-  const products = await searchProductsByName (query);
-
- const categories = await getAllCategories()
- console.log(categories)
+  const categories = await getAllCategories();
+  console.log(categories);
   if (!products?.length) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100 flex-col gap-2 font-medium text-2xl">
@@ -48,16 +41,13 @@ const SearchPage = async ({ searchParams }: Props) => {
       <Container>
         <h1 className="text-xl font-semibold mb-20">
           Search results for {""}
-
           <span className="text-red-500 text-xl">{query}</span> :
         </h1>
 
         <ProductGrid products={products} />
       </Container>
     </div>
-
-);
-
+  );
 };
 
 export default SearchPage;

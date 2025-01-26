@@ -7,8 +7,6 @@ import {
   getSale,
 } from "@/sanity/helpers/main";
 
-
-
 export default async function Home() {
   const sales = await getSale();
   const products = await getAllproducts();
@@ -17,12 +15,16 @@ export default async function Home() {
   return (
     <div>
       <Container>
-      {sales ? (
-        <DiscountBanner sales={sales} />
-      ) : (
-        <div> No sales data available due to network issue </div>
-      )}
-      <ProductItems products={products} title={true} categories={categories} />
+        {sales ? (
+          <DiscountBanner sales={sales} />
+        ) : (
+          <div> No sales data available due to network issue </div>
+        )}
+        <ProductItems
+          products={products}
+          title={true}
+          categories={categories}
+        />
       </Container>
     </div>
   );

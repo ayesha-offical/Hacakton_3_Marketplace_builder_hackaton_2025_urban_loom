@@ -66,9 +66,9 @@ const ProductsCard = ({ product }: Props) => {
           </div>
         </div>
 
-        <p className="text-gray-600 tracking-wide font-semibold text-base line-clamp-1 capitalize ">
+        {/* <p className="text-gray-600 tracking-wide font-semibold text-base line-clamp-1 capitalize ">
           {product.description}
-        </p>
+        </p> */}
         <Price 
           price={product?.price}
           discount={product?.discount}

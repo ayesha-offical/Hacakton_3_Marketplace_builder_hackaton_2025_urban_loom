@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import QuantityOfItems from "./QuantityOfItems";
 import PriceFormat from "./PriceFormat";
 import { useEffect, useState } from "react";
+import useCartStore from "@/store";
 // Adjust the import path as necessary
 
 interface Props {
@@ -15,18 +16,21 @@ interface Props {
 
 const AddtoCart = ({ product }: Props) => {
   const [isClient, setIsClient] = useState(false);
+  const {addItem,getItemCount}= useCartStore();
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  if (!isClient) return null;
+  if (!isClient) {
+    return null;
+  }
+  const itemsCount =getItemCount(product._id);
+  const isOutOfStock = product?.stock === 0;
   const handleAddtoCart = () => {
-    // Add the logic to add the product to the cart
-    // You can use the provided product object as a reference
-    toast.success("Cart added successfully");
+       addItem (product);
+       toast.success(`${product?.name?.substring(0, 12)}....added successfully`);
   };
-  const itemsCount = 0;
   return (
     <div>
       {itemsCount ? (
@@ -45,6 +49,7 @@ const AddtoCart = ({ product }: Props) => {
       ) : (
         <Button
           onClick={handleAddtoCart}
+          disabled={isOutOfStock}
           className={cn(
             "bg-black  w-[93%] hoverEffect shadow-md disabled:hover:cursor-not-allowed disabled:bg-slate-800 disabled:hover:text-gray-400 disabled:border-slate-800"
           )}
