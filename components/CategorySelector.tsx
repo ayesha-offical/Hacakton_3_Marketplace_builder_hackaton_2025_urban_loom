@@ -32,7 +32,7 @@ const CategorySelector = ({ categories }: Props) => {
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          role="combobox"
+          role="Button"
           aria-expanded={open}
           className="w-[200px] justify-between"
         >

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Container from "@/components/container";
 import { BiSolidError } from "react-icons/bi";
 import ProductGrid from "@/components/ProductGrid";
-import { Metadata } from "next";
+
 
 const SearchPage = async ({
   searchParams,
