@@ -1,3 +1,5 @@
+import { defineType } from "sanity"
+
 
 export const customerSchema = defineType({
     name: 'customer',
