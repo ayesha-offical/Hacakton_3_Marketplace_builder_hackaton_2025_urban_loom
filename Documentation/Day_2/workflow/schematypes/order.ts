@@ -1,3 +1,5 @@
+import { defineType } from "sanity"
+
 export const orderSchema = defineType({
     name: 'order',
     title: 'Order',

@@ -1,3 +1,5 @@
+import { defineType } from "sanity"
+
 export const paymentSchema = defineType({
     name: 'payment',
     title: 'Payment',

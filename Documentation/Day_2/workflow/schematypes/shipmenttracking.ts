@@ -1,3 +1,5 @@
+import { defineType } from "sanity"
+
 export const shipmentSchema = defineType({
     name: 'shipment',
     title: 'Shipment',
