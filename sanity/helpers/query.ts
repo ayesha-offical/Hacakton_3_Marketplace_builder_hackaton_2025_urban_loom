@@ -19,27 +19,6 @@ export const PRODUCT_SEARCH_QUERY = defineQuery(`*[
   lower(name) match lower($searchParam + '*')
 ] | order(name asc)`);
 
-// export const PRODUCT_BY_CATEGORY_QUERY = defineQuery(
-//   `*[_type == 'product' && references(*[_type == "category" && slug.current == $categorySlug] ._id ) ] | order(name asc))`
-// );
-// export const PRODUCT_BY_CATEGORY_QUERY = defineQuery(`*[
-//   _type == "product" && 
-//   $categorySlug in categories[]->slug.current
-// ] {
-//   _id,
-//   name,
-//   description,
-//   price,
-//   "slug": slug.current,
-//   "image": image.asset->url,
-//   categories[]->
-// } | order(name asc)`);
-
-
-// export const PRODUCT_BY_CATEGORY_QUERY = defineQuery(`*[
-//   _type == "product" && 
-//   references(*[_type == "category" && slug.current == $categorySlug]._id)
-// ] | order(name asc)`);
 
 
 export const PRODUCT_BY_CATEGORY_QUERY = defineQuery(`*[
