@@ -53,6 +53,7 @@ const AddtoCart = ({ product }: Props) => {
           className={cn(
             "bg-black  w-[93%] hoverEffect shadow-md disabled:hover:cursor-not-allowed disabled:bg-slate-800 disabled:hover:text-gray-400 disabled:border-slate-800"
           )}
+          aria-label="Add to Cart"
         >
           Add to Cart
         </Button>

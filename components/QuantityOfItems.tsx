@@ -40,6 +40,7 @@ const QuantityOfItems = ({ product}: Props) => {
         size="icon"
         className="w-6 h-6"
         onClick={handleRemoveItem}
+        aria-label="Decrease Quantity"
       >
         <HiMinus />
       </Button>
@@ -52,6 +53,7 @@ const QuantityOfItems = ({ product}: Props) => {
         size="icon"
         className="w-6 h-6"
         onClick={handleAddItem}
+        aria-label="Increase Quantity"
       >
         <HiPlus />
       </Button>

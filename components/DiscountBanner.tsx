@@ -63,8 +63,8 @@ const DiscountBanner = ({ sales }: { sales: SALES_QUERYResult }) => {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="absolute left-2" />
-      <CarouselNext className="absolute right-2" />
+      <CarouselPrevious className="absolute left-2" aria-label="Previous Slide"/>
+      <CarouselNext className="absolute right-2"   aria-label="Next Slide"/>
     </Carousel>
   );
 };

@@ -19,7 +19,8 @@ const ProductCartBar = () => {
     <Button 
         onClick={handleAddtoWishList}
     
-    className={cn('border mb-2 w-6 h-7 shadow-md bg-black  text-white hover:bg-white hover:text-black hoverEffect rounded-full ')}>
+    className={cn('border mb-2 w-6 h-7 shadow-md bg-black  text-white hover:bg-white hover:text-black hoverEffect rounded-full ')}
+    aria-label="Add to Wishlist">
 <MdFavoriteBorder/>
 </Button>
 
