@@ -3,7 +3,7 @@ import React from "react";
 
 const Contact = () => {
   return (
-    <div className="container mx-auto px-28 my-5  py-12 bg-gray-100  rounded-lg shadow-lg">
+    <div className="container mx-auto px-6 my-5  py-12 bg-gray-100  rounded-lg shadow-lg">
       <h1 className="text-4xl font-extrabold text-gray-800 text-center mb-6">Contact Us</h1>
       <p className="text-lg text-gray-600 leading-relaxed text-center max-w-3xl mx-auto">
         Have questions or need assistance? Get in touch with us and lets bring your dream space to life.
