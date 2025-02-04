@@ -18,17 +18,17 @@ const Footer: React.FC = () => {
         <div className="w-full md:w-1/3 text-center mb-4 md:mb-0">
           <ul className="space-y-2">
             <li>
-              <Link href="/" className="hover:text-cyan-900">
+              <Link href="/about" className="hover:text-cyan-900">
                 About Urban Loom
               </Link>
             </li>
             <li>
-              <Link href="/" className="hover:hover:text-cyan-900">
+              <Link href="/services" className="hover:hover:text-cyan-900">
                 Our Services
               </Link>
             </li>
             <li>
-              <Link href="/" className="hover:hover:text-cyan-900">
+              <Link href="/contact" className="hover:hover:text-cyan-900">
                 Contact Us
               </Link>
             </li>

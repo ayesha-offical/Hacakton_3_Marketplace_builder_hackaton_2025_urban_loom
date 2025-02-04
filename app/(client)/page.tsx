@@ -26,6 +26,7 @@ export default async function Home() {
           categories={categories}
         />
       </Container>
+   
     </div>
   );
 }
