@@ -1,0 +1,8 @@
+Test Case ID,Test Case Description,Expected Result,Actual Result,Status,Severity Level,Remarks
+,,,,,,
+TC001,Validate product listing page,Products displayed correctly,Products displayed correctly,Passed,Medium,No issues found
+TC002,Performance,Performance Score <90,Score 85,Passed,Medium,Improve needed
+TC003,Accessibility,Accesibility Score <90,Score 100,Passed,High,Test Successful
+TC004,Seo,Seo score<90,Score 100,Passed,High,Test successful
+TC005,Add to Cart Funtionality,Item Increase /Decrese/Add and Remove,Result as expected ,Passed,High,Successfull funtionality 
+TC006,Best Practices,Practices Score <90,Score 100,Passed,High,Good
