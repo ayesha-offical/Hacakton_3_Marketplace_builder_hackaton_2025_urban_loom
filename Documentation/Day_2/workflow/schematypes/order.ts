@@ -1,71 +1,168 @@
-import { defineType } from "sanity"
+import { defineArrayMember, defineField, defineType } from "sanity";
+import { BasketIcon } from "@sanity/icons";
 
-export const orderSchema = defineType({
-    name: 'order',
-    title: 'Order',
-    type: 'document',
+export const orderType = defineType({
+    name: "order",
+    title: "Order",
+    type: "document",
+    icon: BasketIcon,
     fields: [
-        {
-            name: 'orderID',
-            title: 'Order ID',
-            type: 'number', // Unique identifier for each order
-            validation: (Rule) => Rule.required(),
-        },
-        {
-            name: 'customer',
-            title: 'Customer',
-            type: 'object', // Embedded object for customer details
+      defineField({
+        name: "orderNumber",
+        title: "Order Number",
+        type: "string",
+        validation: (Rule) => Rule.required(),
+      }),
+      defineField({
+        name: "stripeCheckoutSessionId",
+        title: "Stripe Checkout Session ID",
+        type: "string",
+      }),
+      defineField({
+        name: "stripeCustomerId",
+        title: "Stripe Customer ID",
+        type: "string",
+        validation: (Rule) => Rule.required(),
+      }),
+      defineField({
+        name: "clerkUserId",
+        title: "Store User ID",
+        type: "string",
+        validation: (Rule) => Rule.required(),
+      }),
+      defineField({
+        name: "customerName",
+        title: "Customer Name",
+        type: "string",
+        validation: (Rule) => Rule.required(),
+      }),
+      defineField({
+        name: "email",
+        title: "Customer Email",
+        type: "string",
+        validation: (Rule) => Rule.required().email(),
+      }),
+      defineField({
+        name: "stripePaymentIntentId",
+        title: "Stripe Payment Intent ID",
+        type: "string",
+        validation: (Rule) => Rule.required(),
+      }),
+  
+      defineField({
+        name: "products",
+        title: "products",
+        type: "array",
+        of: [
+          defineArrayMember({
+            type: "object",
             fields: [
-                { name: 'name', title: 'Name', type: 'string', validation: (Rule) => Rule.required() },
-                { name: 'email', title: 'Email', type: 'string', validation: (Rule) => Rule.required().email() },
-                { name: 'phone', title: 'Phone', type: 'string', validation: (Rule) => Rule.required() },
-                { name: 'address', title: 'Address', type: 'text', validation: (Rule) => Rule.required() },
+              defineField({
+                name: "product",
+                title: "Produc Bought",
+                type: "reference",
+                to: [{ type: "product" }],
+              }),
+              defineField({
+                name: "quantity",
+                title: "Quantity",
+                type: "number",
+              }),
             ],
-        },
-        {
-            name: 'products',
-            title: 'Products',
-            type: 'array', // Array of product references with quantity
-            of: [
-                {
-                    type: 'object',
-                    fields: [
-                        { name: 'product', title: 'Product', type: 'reference', to: [{ type: 'product' }] },
-                        { name: 'quantity', title: 'Quantity', type: 'number', validation: (Rule) => Rule.required().min(1) },
-                    ],
-                },
-            ],
-        },
-        {
-            name: 'totalAmount',
-            title: 'Total Amount',
-            type: 'number', // Total price for the order
-            validation: (Rule) => Rule.required().positive(),
-        },
-        {
-            name: 'status',
-            title: 'Status',
-            type: 'string', // Order progress status
-            options: {
-                list: [
-                    { title: 'Pending', value: 'pending' },
-                    { title: 'Shipped', value: 'shipped' },
-                    { title: 'Delivered', value: 'delivered' },
-                    { title: 'Cancelled', value: 'cancelled' },
-                ],
+  
+            preview: {
+              select: {
+                product: "product.name",
+                quantity: "quantity",
+                image: "product.image",
+                price: "product.price",
+                currency: "product.currency",
+              },
+              prepare(select) {
+                return {
+                  title: `${select.product} x ${select.quantity}`,
+                  subtitle: `${select.price * select.quantity} `,
+                  media: select.image,
+                };
+              },
             },
-            validation: (Rule) => Rule.required(),
+          }),
+        ],
+      }),
+  
+      defineField({
+        name: "totalPrice",
+        title: "Total Price",
+        type: "number",
+        validation: (Rule) => Rule.required().min(0),
+      }),
+      defineField({
+        name: "currency",
+        title: "Currency",
+        type: "string",
+        validation: (Rule) => Rule.required(),
+      }),
+      defineField({
+        name: "amountDiscount",
+        title: "Amount Discount",
+        type: "number",
+        validation: (Rule) => Rule.required(),
+      }),
+  
+      defineField({
+        name: "status",
+        title: "Status",
+        type: "string",
+        options: {
+          list: [
+            {
+              title: "Pending",
+              value: "pending",
+            },
+            {
+              title: "Paid",
+              value: "paid",
+            },
+            {
+              title: "Shipped",
+              value: "shipped",
+            },
+            {
+              title: "Delivered",
+              value: "delivered",
+            },
+            {
+              title: "Cancelled",
+              value: "cancelled",
+            },
+          ],
         },
-        {
-            name: 'createdAt',
-            title: 'Created At',
-            type: 'datetime', // Order creation date and time
-            validation: (Rule) => Rule.required(),
-        },
-        {
-            name: 'updatedAt',
-            title: 'Updated At',
-            type: 'datetime', // Last update date and time
-        },
+      }),
+  
+      defineField({
+        name: "orderDate",
+        title: "Order Date",
+        type: "datetime",
+        validation: (Rule) => Rule.required(),
+      }),
     ],
-});
+  
+    preview: {
+      select: {
+        name: "customerNumber",
+        amount: "totalPrice",
+        currency: "currency",
+        orderId: "orderNumber",
+        email: "email",
+      },
+      prepare(select) {
+        const orderIdSnippet = `${select.orderId.slice(0, 5)}....${select.orderId.slice(-5)}`;
+        return {
+          title: `${select.name} (${orderIdSnippet})`,
+          subtitle: `${select.amount} ${select.currency}, ${select.email}`,
+          media: BasketIcon,
+        };
+      },
+    },
+  });
+  
