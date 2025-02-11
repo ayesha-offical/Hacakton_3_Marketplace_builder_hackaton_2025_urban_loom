@@ -131,10 +131,10 @@ export type Sales = {
 
 export type Category = {
   _id: string;
-  _type: "category";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
+  _type?: "category";
+  _createdAt?: string;
+  _updatedAt?: string;
+  _rev?: string;
   title?: string;
   slug?: Slug;
   description?: string;
