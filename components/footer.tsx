@@ -1,9 +1,10 @@
-
+import Container from "./container";
 import React from "react";
 import Link from 'next/link';
 
 const Footer: React.FC = () => {
   return (
+    <Container>
     <footer className="border-t py-8">
       <div className="container  mx-auto flex flex-wrap justify-between items-center">
         
@@ -41,6 +42,8 @@ const Footer: React.FC = () => {
         </div>
       </div>
     </footer>
+
+    </Container>
   );
 };
 
